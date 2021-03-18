@@ -12,7 +12,6 @@ import Logout from './components/Logout'
 
 function App() {
   const [generalLocation, setGeneralLocation] = useState("London")
-  console.log(generalLocation)
   return (
     <div>
       <Route path="/" exact>
