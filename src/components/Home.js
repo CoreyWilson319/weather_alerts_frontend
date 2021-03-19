@@ -70,6 +70,10 @@ function Home(props) {
           <li>Precipitation: {precipitation}</li>
           <li>Humidity: {humidity}</li>
           <li>Wind: {wind}</li>
+          <Link to={`/weather/${props.loc}`}>
+              <Weather />
+              {/* On weather page grab all of the data and fomrat it nicely */}
+          </Link>
       </ul>
       {/* Grab location data from browser, use that information from location to show local weather */}
       {/* Maybe just have basic information on the home page,  */}
