@@ -1,6 +1,7 @@
 import React from 'react';
 
-function Weather() {
+function Weather(props) {
+    console.log(props)
     return(
         <div>
             <h1>Weather</h1>

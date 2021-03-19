@@ -9,26 +9,10 @@ require('dotenv').config()
 
 function Home(props) {
 
-    const [condition, setCondition] = useState("")
-    const [feelsLike, setFeelsLike] = useState("")
-    const [wind, setWind] = useState("")
-    const [gust, setGust] = useState("")
-    const [windDirection, setWindDirection] = useState("")
-    const [humidity, setHumidity] = useState("")
-    const [precipitation, setPrecipitation] = useState("")
-    const [temperature, setTemperature] = useState("")
-    const [locationName, setLocationName] = useState("")
-    const [locationRegion, setLocationRegion] = useState("")
-    const [country, setCountry] = useState("")
-    const [latitude, setLatitude] = useState("")
-    const [longitude, setLongitude] = useState("")
-    const [visibility, setVisibility] = useState("")
-
-    
-
-        function generalWeatherHandler(props) {
-          let loc = props.loc
-          axios.get('http://api.weatherapi.com/v1/current.json?key=' + process.env.REACT_APP_API_KEY + '&q=' + loc) // Change London to whatever the users location is based on location in user data
+    const [generalData, setGeneralData] = useState("")
+    useEffect(
+        () => {
+          axios.get('http://api.weatherapi.com/v1/current.json?key=' + process.env.REACT_APP_API_KEY + '&q=' + props.loc) // Change London to whatever the users location is based on location in user data
           .then((response) => {
               let res = response.data.current
               console.log(response.data)
@@ -47,10 +31,28 @@ function Home(props) {
               setLocationRegion(res.region)
               setLatitude(res.lat)
               setLongitude(res.lon)
+              setGeneralData(response.data)
           })
-        }
+        }, []
+        )
+    const [condition, setCondition] = useState("")
+    const [feelsLike, setFeelsLike] = useState("")
+    const [wind, setWind] = useState("")
+    const [gust, setGust] = useState("")
+    const [windDirection, setWindDirection] = useState("")
+    const [humidity, setHumidity] = useState("")
+    const [precipitation, setPrecipitation] = useState("")
+    const [temperature, setTemperature] = useState("")
+    const [locationName, setLocationName] = useState("")
+    const [locationRegion, setLocationRegion] = useState("")
+    const [country, setCountry] = useState("")
+    const [latitude, setLatitude] = useState("")
+    const [longitude, setLongitude] = useState("")
+    const [visibility, setVisibility] = useState("")
+
+    
+
         
-        generalWeatherHandler(props)
 
   return (
     <div>
@@ -71,8 +73,9 @@ function Home(props) {
           <li>Humidity: {humidity}</li>
           <li>Wind: {wind}</li>
           <Link to={`/weather/${props.loc}`}>
-              <Weather />
+              <Weather generalWeather={generalData} />
               {/* On weather page grab all of the data and fomrat it nicely */}
+              {/* Maybe add 3 day or whatever, weekend */}
           </Link>
       </ul>
       {/* Grab location data from browser, use that information from location to show local weather */}
