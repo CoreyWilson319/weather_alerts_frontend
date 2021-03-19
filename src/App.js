@@ -7,6 +7,7 @@ import SetTempLocation from './components/SetTempLocation'
 import Register from './components/Register'
 import Login from './components/Login'
 import Logout from './components/Logout'
+import Weather from './components/Weather'
 
 // Grab user for state and pass the user as props
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/register" exact component={Register} />
       <Route path="/login" exact component={Login} />
       <Route path="/logout" exact component={Logout} />
+      <Route path="/weather/:location" component={Weather} />
     </div>
   );
 }
