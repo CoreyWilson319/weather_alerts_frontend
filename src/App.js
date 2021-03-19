@@ -12,18 +12,29 @@ import Weather from './components/Weather'
 // Grab user for state and pass the user as props
 
 function App() {
+
+  // LEAVING OFF HERE
+  // IDEA BRING OUT STATE FROM HOME AND USE IT AS STATE FOR APP.JS
+
+
   const [generalLocation, setGeneralLocation] = useState("London")
+  const [data, setData] = useState("")
+  function handleCallback(childData) {
+    setData(childData)
+    
+  }
+  console.log("app", data)
   return (
     <div>
       <Route path="/" exact>
-        <Home loc={generalLocation}/>
+        <Home loc={generalLocation} parentCallback ={handleCallback}/>
       </Route>
       <Route path="/:id/addLoc" exact component={SetLocation} />
       <Route path="/:id/tempLoc" exact component={SetTempLocation} />
       <Route path="/register" exact component={Register} />
       <Route path="/login" exact component={Login} />
       <Route path="/logout" exact component={Logout} />
-      <Route path="/weather/:location" component={Weather} />
+      <Route path="/weather/:location"><Weather data={data}/></Route>
     </div>
   );
 }

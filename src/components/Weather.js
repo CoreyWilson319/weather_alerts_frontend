@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
+// import Home from './Home'
 
 function Weather(props) {
 
-    const [data, setData] = useState("")
-    useEffect(() => {
-        setData(props)
-
-    }, [])
-
-    console.log("data", data)
+    // console.log("props", props)
+    // console.log(props.location)
     return(
         <div>
             <h1>Weather</h1>

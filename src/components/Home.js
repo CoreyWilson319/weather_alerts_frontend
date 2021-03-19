@@ -15,7 +15,6 @@ function Home(props) {
           axios.get('http://api.weatherapi.com/v1/current.json?key=' + process.env.REACT_APP_API_KEY + '&q=' + props.loc) // Change London to whatever the users location is based on location in user data
           .then((response) => {
               let res = response.data.current
-              console.log(response.data)
               setCondition(res.condition.text)
               setFeelsLike(res.feelslike_f)
               setWind(res.wind_mph)
@@ -32,6 +31,12 @@ function Home(props) {
               setLatitude(res.lat)
               setLongitude(res.lon)
               setGeneralData(response.data)
+
+          }).then(() => {
+            function onTrigger() {
+              props.parentCallback();
+            }
+            onTrigger()
           })
         }, []
         )
@@ -53,7 +58,6 @@ function Home(props) {
     
 
         
-
   return (
     <div>
       <div>NavBar</div>
@@ -72,12 +76,14 @@ function Home(props) {
           <li>Precipitation: {precipitation}</li>
           <li>Humidity: {humidity}</li>
           <li>Wind: {wind}</li>
-          <Link to={`/weather/${props.loc}`}>
-              <Weather generalWeather={generalData} />
               {/* On weather page grab all of the data and fomrat it nicely */}
               {/* Maybe add 3 day or whatever, weekend */}
-          </Link>
+           {/* <Link to={`/weather/${props.loc}`} generalData={generalData}>
+               Weather
+              </Link> */}
       </ul>
+      <Link to ={`/weather/${props.loc}`
+      }><Weather data={generalData}/></Link>
       {/* Grab location data from browser, use that information from location to show local weather */}
       {/* Maybe just have basic information on the home page,  */}
       {/* Pass state as props to a more indepth component page */}
